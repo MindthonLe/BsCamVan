@@ -1,0 +1,6 @@
+{
+  "name": "Hệ thống Báo cáo Siêu âm Sản Phụ khoa",
+  "description": "Phần mềm khai báo thông tin bệnh nhân, nhập kết quả siêu âm sản khoa/phụ khoa, dán ảnh chụp siêu âm trực tiếp từ máy và in báo cáo kết quả PDF chuyên nghiệp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
