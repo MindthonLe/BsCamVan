@@ -8,6 +8,7 @@ import UltrasoundForm from "./components/UltrasoundForm";
 import PatientHistory from "./components/PatientHistory";
 import ClinicProfileSettings from "./components/ClinicProfileSettings";
 import ReportPrintView from "./components/ReportPrintView";
+import { printReportInNewTab } from "./utils/printHelper";
 import {
   Activity,
   UserCheck,
@@ -166,7 +167,7 @@ export default function App() {
   };
 
   // Accept/Verify draft and save to report history
-  const handleTriggerPrint = () => {
+  const handleSaveReport = (silent = false) => {
     if (!selectedReport) return;
 
     // Check if report already exists in history list
@@ -184,10 +185,22 @@ export default function App() {
     
     saveReportsList(updated);
 
-    // Call browser Print
-    setTimeout(() => {
-      window.print();
-    }, 150);
+    if (!silent) {
+      alert(`Đã lưu kết quả siêu âm bệnh nhân "${selectedReport.patient.fullName}" thành công!`);
+      setActiveTab("history");
+    }
+  };
+
+  const handleTriggerPrint = () => {
+    handleSaveReport(true);
+
+    if (selectedReport) {
+      printReportInNewTab(selectedReport, clinicProfile);
+    }
+  };
+
+  const handleSaveOnly = () => {
+    handleSaveReport(false);
   };
 
   const handleEditReportBack = () => {
@@ -381,6 +394,7 @@ export default function App() {
               report={selectedReport}
               clinicProfile={clinicProfile}
               onPrint={handleTriggerPrint}
+              onSave={handleSaveOnly}
               onEdit={handleEditReportBack}
             />
           </div>

@@ -1,14 +1,15 @@
 import { UltrasoundReport, ClinicProfile, ProtocolType } from "../types";
-import { Printer, Edit3, ArrowLeft, Calendar, User, Phone, MapPin, Building } from "lucide-react";
+import { Printer, Edit3, ArrowLeft, Calendar, User, Phone, MapPin, Building, Check } from "lucide-react";
 
 interface ReportPrintViewProps {
   report: UltrasoundReport;
   clinicProfile: ClinicProfile;
   onPrint: () => void;
+  onSave: () => void;
   onEdit: () => void;
 }
 
-export default function ReportPrintView({ report, clinicProfile, onPrint, onEdit }: ReportPrintViewProps) {
+export default function ReportPrintView({ report, clinicProfile, onPrint, onSave, onEdit }: ReportPrintViewProps) {
   const isObstetric = report.protocolType === ProtocolType.Obstetric;
   const patient = report.patient;
 
@@ -25,13 +26,23 @@ export default function ReportPrintView({ report, clinicProfile, onPrint, onEdit
           <span>Quay lại chỉnh sửa</span>
         </button>
 
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-3 gap-2">
           <button
             onClick={onPrint}
-            className="px-5 py-2.5 text-xs font-black text-white bg-indigo-650 hover:bg-indigo-750 rounded-xl transition flex items-center space-x-2 shadow-xs cursor-pointer"
+            type="button"
+            className="px-5 py-2.5 text-xs font-black text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition flex items-center space-x-2 shadow-xs cursor-pointer"
           >
             <Printer size={15} />
-            <span>XUẤT FILE / IN PHIẾU (A4)</span>
+            <span>IN KẾT QUẢ SIÊU ÂM (A4)</span>
+          </button>
+
+          <button
+            onClick={onSave}
+            type="button"
+            className="px-5 py-2.5 text-xs font-black text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition flex items-center space-x-2 shadow-xs cursor-pointer"
+          >
+            <Check size={15} />
+            <span>LƯU HỒ SƠ BỆNH NHÂN</span>
           </button>
         </div>
       </div>

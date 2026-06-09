@@ -15,6 +15,8 @@
     margin: 0 !important;
     padding: 0 !important;
     font-size: 11pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   
   /* Hide all interactive parts, headers, tabs, options */
@@ -36,7 +38,7 @@
     max-width: 100% !important;
   }
 
-  #ultrasound-print-sheet {
+  #ultrasound-print-sheet, .print-page {
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
@@ -44,12 +46,99 @@
     width: 100% !important;
     max-width: 100% !important;
     min-height: auto !important;
+    border-radius: 0 !important;
+  }
+
+  /* Strict single-page A4 optimizations */
+  .print-page {
+    font-size: 11.5px !important; 
+    line-height: 1.35 !important;
+  }
+
+  /* Scale down spacing values specifically inside the sheet when printing */
+  .print-page .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 10px !important;
+  }
+  .print-page .space-y-5 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 8px !important;
+  }
+  .print-page .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 6px !important;
+  }
+  .print-page .space-y-2 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 3px !important;
+  }
+
+  /* Compact padding classes */
+  .print-page .p-8, .print-page .p-12, .print-page .md\:p-12 {
+    padding: 0 !important;
+  }
+  .print-page .p-4 {
+    padding: 8px !important;
+  }
+  .print-page .pb-5 {
+    padding-bottom: 8px !important;
+  }
+  .print-page .pt-8 {
+    padding-top: 8px !important;
+  }
+  .print-page .pt-5 {
+    padding-top: 6px !important;
+  }
+  .print-page .pb-4 {
+    padding-bottom: 6px !important;
+  }
+
+  /* Control ultrasound image constraints to avoid page spillover */
+  .print-page img {
+    max-height: 110px !important;
+    width: auto !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+  }
+
+  /* Ensure rows of images and elements are beautifully packed together */
+  .print-page .grid {
+    gap: 10px !important;
+  }
+  
+  .print-page h1 {
+    font-size: 15px !important;
+    margin-bottom: 2px !important;
+  }
+  .print-page h2 {
+    font-size: 12px !important;
+  }
+  .print-page h3 {
+    font-size: 10.5px !important;
+    padding-bottom: 2px !important;
+    margin-bottom: 4px !important;
+  }
+  .print-page h4 {
+    font-size: 9.5px !important;
+  }
+
+  /* Compact block with clinical diagnosis or prescription */
+  .print-page .p-4.bg-indigo-50\/20,
+  .print-page .p-4.bg-slate-50 {
+    padding: 8px 10px !important;
+    border-radius: 8px !important;
+  }
+
+  .print-page .p-4.bg-slate-50\/70 {
+    padding: 8px 12px !important;
+    border-radius: 10px !important;
+  }
+
+  /* Ensure signature height is balanced so it never gets shoved to page 2 */
+  .print-page .h-16 {
+    height: 38px !important;
   }
 
   /* Make sure printing aligns well with A4 portrait */
   @page {
     size: A4 portrait;
-    margin: 10mm 15mm 10mm 15mm;
+    margin: 8mm 12mm 8mm 12mm;
   }
 
   /* Avoid cutting off sections or images across page breaks */
